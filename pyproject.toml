@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools >= 77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ops.auxiliary"
+description = "Drivers and services for auxiliary sensors and equipment."
+requires-python = ">=3.11"
+authors = [
+    {name = "Jessica Rehak", email = "rehak@lbl.gov"}
+]
+dynamic = ["version"]
+dependencies = [
+    "phidget22",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+]
+
+[tool.setuptools.packages.find]
+include = ["ops.auxiliary*"]
+exclude = ["tests*"]    
+
+[tool.setuptools.dynamic]
+version = {attr = "ops.auxiliary.__version__"}
+
+[tool.pytest.ini_options]
+pythonpath = [ 
+    "." 
+    ]
+addopts = [
+    "--cov=ops/auxiliary",
+    "--cov-report=term-missing", 
+    "--cov-report=xml",          
+]
+
+# Tool settings
+[tool.ruff]
+target-version = "py311"
+line-length = 99
+exclude = [
+    ".git",
+    ".ruff_cache",
+    ".venv",
+    "__pypackages__",
+    "dist",
+    "build",
+]
+src = ["."]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ops.auxiliary"]
+
+[tool.pyright]
+reportUnusedImports = "none"
+pythonVersion = "3.11"
+exclude = [
+    ".git",
+    ".ruff_cache",
+    ".venv",
+    "__pypackages__",
+    "dist",
+    "build",
+]
