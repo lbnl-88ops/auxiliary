@@ -29,9 +29,7 @@ exclude = ["tests*"]
 version = {attr = "ops.auxiliary.__version__"}
 
 [tool.pytest.ini_options]
-pythonpath = [ 
-    "." 
-    ]
+paths = ["."]
 addopts = [
     "--cov=ops/auxiliary",
     "--cov-report=term-missing", 
