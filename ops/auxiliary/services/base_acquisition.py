@@ -18,7 +18,7 @@ def _producer_thread(
         try:
             data = producer()
         except Exception as exc:
-            raise RuntimeError(exc)
+            raise ConnectionError(exc)
         loop.call_soon_threadsafe(data_queue.put_nowait, data)
 
 

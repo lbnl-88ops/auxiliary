@@ -60,6 +60,7 @@ class VoltageRatioBridge(SessionDriver):
     async def connect(self) -> None:
         if self.is_connected:
             _log.debug("Voltage ratio bridge is already connected")
+            return
         else:
             _log.info("Connecting to bridge channels...")
             for channel, bridge in self._bridge_channels.items():
@@ -80,7 +81,7 @@ class VoltageRatioBridge(SessionDriver):
 
     async def disconnect(self) -> None:
         if not self.is_connected:
-            _log.debug("Voltage raitio bridge is already disconnected")
+            _log.debug("Voltage ratio bridge is already disconnected")
             return
         _log.info("Disconnecting voltage ratio bridge")
         for channel, bridge in self._bridge_channels.items():
