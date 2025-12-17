@@ -12,7 +12,7 @@ class LoadCell(_LogicalDeviceBase):
         self,
         connection: VoltageRatioBridge,
         read_key: VoltageRatioBridge.Channel,
-        name: str = "Load cell",
+        id: str = "Load cell",
         gain: Optional[float] = None,
         offset: Optional[float] = None,
     ):
@@ -20,11 +20,11 @@ class LoadCell(_LogicalDeviceBase):
         self._read_key = read_key
         self._gain = gain
         self._offset = offset
-        self._name = name
+        self._id = id
 
     async def calibrate(self) -> None:
         try:
-            _log.info(f"Calibrating {self._name}, clear load cell and press Enter")
+            _log.info(f"Calibrating {self._id}, clear load cell and press Enter")
             input()
         except KeyboardInterrupt:
             _log.info("Calibration aborted.")
@@ -34,7 +34,7 @@ class LoadCell(_LogicalDeviceBase):
 
         try:
             _log.info(
-                f"Place a known weight on {self._name}, type the weight in grams and press Enter:"
+                f"Place a known weight on {self._id}, type the weight in grams and press Enter:"
             )
             w2 = input("> ")
         except KeyboardInterrupt:
